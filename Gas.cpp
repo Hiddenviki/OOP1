@@ -159,37 +159,32 @@ void SearchByFam(Warehouse* Obj, int amount)
     }
 } //найти товар по названию
 
-void Copy(Warehouse d_n, Warehouse d_o){
+void Sort(Warehouse* Obj, int amount)
+{
+    // сортировка пузырьком
+    Warehouse tmp;
 
-    d_n.fam = d_o.fam;
-    d_n.price = d_o.price;
-    d_n.quant = d_o.quant;
-    d_n.num = d_o.num;
-
-} //та копировалка которая для конкретных элементов
-void Sort(Warehouse* Obj, int amount){
-
-    Warehouse buf; //некая переменная временного характера
-
-    //мой любимый пузырек
-    for (int i=0; i<amount; i++){
-        for (int j=i+1; j<amount; j++){
-            if (Obj[i].quant > Obj[j].quant){
-                Copy(buf,Obj[j]);
-                Copy(Obj[j],Obj[i]);
-                Copy(Obj[i],buf);
+    for (int i = amount - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            // сравниваем элементы массива структур по сумме баллов студента
+            if (Obj[j].num < Obj[j + 1].num)
+            {
+                tmp = Obj[j];
+                Obj[j] = Obj[j + 1];
+                Obj[j + 1] = tmp;
             }
         }
     }
-    cout<<"Данные отсортированы"<<endl;
 
-    cout << "НАЗВАНИЕ ТОВАРА" << "НОМЕР СЕКЦИИ" << "ЦЕНА" << "КОЛИЧЕСТВО ТОВАРА" <<endl;
+    // в цикле выводим в консоль отсортированный массив структур
+    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
     for (int i = 0; i < amount; i++) {
-        cout << Obj[i].fam << Obj[i].num << Obj[i].price << Obj[i].quant<<endl;
+        cout << Obj[i].fam<<" "<< Obj[i].price<<" "<<Obj[i].quant<<" "<<Obj[i].num<<endl;
     }
-
-
 }
+
 
 ////////////////////////SIDE HOES///////////////////////////////////////////////////////////////////////////////////////
 
