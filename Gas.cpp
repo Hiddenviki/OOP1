@@ -69,7 +69,7 @@ char * getFam(){
             if((str[i]>='0' and str[i]<='9' and str[i]) or (str[i]<='/' and str[i]>='!') or (str[i]<='@' and str[i]>=':') or (str[i]<='`' and str[i]>='[') or (str[i]<='~' and str[i]>='{'))
                 break;
         if(str[i])
-            cout<<"___Зачем вы ввели не буквы...?___"<<endl<<"___Повторите ввод___"<<endl;
+            cout<<"Зачем вы ввели не буквы...?"<<endl<<"Повторите ввод"<<endl;
     }while(str[i]);
 
     for (i = 0; str[i]; i++){
