@@ -201,12 +201,12 @@ void Sort(Warehouse* Obj, int amount)
     // сортировка пузырьком
     Warehouse tmp;
 
-    for (int i = amount - 1; i >= 0; i--)
+    for (int i = amount - 1 ; i >= 0; i--)
     {
         for (int j = 0; j < i; j++)
         {
-            // сравниваем элементы массива структур по сумме баллов студента
-            if (Obj[j].num > Obj[j + 1].num)
+            // сравниваем элементы массива структур по уменьшению количества
+            if (Obj[j].quant < Obj[j + 1].quant)
             {
                 tmp = Obj[j];
                 Obj[j] = Obj[j + 1];
@@ -249,120 +249,6 @@ void ReadDataFromDisk(Warehouse* Obj, int amount,string fileName) {
         }
         myfile.close();
     }
-
-
-/////////////////////////////////////////////////////////
-//
-//    ifstream fin;
-//    fin.open(fileName);
-//
-//    string buffer; // буфер для строк из файла
-//    string tmp;
-//    int pos = 0;
-//
-//    if (!fin.is_open()) {
-//        cout << "ERROR! Файл не открылся!" << endl;
-//    } else {
-//        cout << "Файл открылся" << endl;
-//
-//        while (fin.peek() != EOF) {
-//            getline(fin, buffer);
-//            AddStruct(Obj, amount);
-//            amount++;
-//        } //считаю количество строк в файле и выделяю память под каждую структуру
-//
-//        buffer=""; //немного так сказать почистила тут
-//
-//        while (!fin.eof())
-//        {
-//            for (int struct_number=0; struct_number<amount; struct_number++){
-//                tmp = "";
-//                getline(fin,buffer);
-//
-//
-//                for (char j : buffer){
-//                    if (!isspace(j)) {
-//                        tmp += j;
-//                    } //мне не нужны пробелы
-//
-//                    else{
-//
-//                        if (pos == 0){
-//                            char* d = new char[buffer.length()];
-//                            Obj[struct_number].fam =d;
-//                            pos++;
-//                            tmp = "";
-//                        }
-//
-//                        else if (pos == 1){
-//                            double a = atof(buffer.c_str()); //price2
-//                            Obj[struct_number].price = a;
-//                            pos++;
-//                            tmp = "";
-//                        }
-//
-//                        else if (pos==2){
-//                            int b =atoi(buffer.c_str()); //quant3
-//                            Obj[struct_number].quant = b;
-//                            pos++;
-//                            tmp = "";
-//
-//                        }
-//
-//                        else if (pos==3){
-//                            int c=atoi(buffer.c_str()); //num4
-//                            Obj[struct_number].num = c;
-//                            pos++;
-//                            tmp = "";
-//                        }
-//                    }
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
-//    fin.close();
-//
-//    cout<<"Данные с диска:"<<endl;
-//    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
-//    for (int i = 0; i < amount; i++) {
-//        cout << Obj[i].fam<<" "<< Obj[i].price<<" "<<Obj[i].quant<<" "<<Obj[i].num<<endl;
-//    }
-////////////////////////////////////////////////
-//
-//    ifstream reading("file.txt");
-//
-//    ifstream in(fileName);
-//    string s;
-//    while (in.peek() != EOF) {
-//        getline(in, s);
-//        amount++;
-//    } //считаю количество структур (строк) в файле
-//
-//    FILE* file = fopen("file.txt","r");
-//    if (file == NULL){
-//        cout<< "NO DATA";
-//    }
-//
-//    char buffer[amount];
-//    fgets(buffer,amount,file);
-//
-//    while(!feof(file)){
-//        for (int i=0; i<amount; i++) {
-//            Warehouse Obj[i];
-//            sscanf(buffer, "%s %le %d %d", Obj[i].fam, &Obj[i].price, &Obj[i].quant, &Obj[i].num);
-//            fgets(buffer,amount,file);
-//        }
-//    }
-//    fclose(file);
-//    reading.close();
-//    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
-//    for (int i = 0; i < amount; i++) {
-//        cout << Obj[i].fam<<" "<< Obj[i].price<<" "<<Obj[i].quant<<" "<<Obj[i].num<<endl;
-//    }
 
 
 }
