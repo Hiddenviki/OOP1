@@ -1,5 +1,8 @@
-#include <sstream>
+
 #include "Putin.h"
+#include <sstream>
+#include "StreamTable.h"
+
 
 ////////////////////////CHECK////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -119,9 +122,22 @@ void setData(Warehouse* Obj, int amount)
 void showData(Warehouse* Obj, int amount)
 {
     //system("cls");
-    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
+
+    StreamTable st(std::cout);
+    st.AddCol(5);
+    st.AddCol(15);
+    st.AddCol(10);
+    st.AddCol(10);
+
+    st.MakeBorderExt(true);
+    st.SetDelimRow(true, '-');//st.SetDelimRow(false);//без символов-разделителей строк
+    st.SetDelimCol(true, '|');//st.SetDelimCol(false);//без символов-разделителей строк
+
+
+    //заголовок и значения выводятся одинаково
+    st << "PRODUCT" << "SECTION" << "PRICE" << "AMOUNT";
     for (int i = 0; i < amount; i++) {
-        cout << Obj[i].fam<<" "<< Obj[i].price<<" "<<Obj[i].quant<<" "<<Obj[i].num<<endl;
+        st << Obj[i].fam  << Obj[i].num << Obj[i].price << Obj[i].quant;
     }
 
 }
@@ -132,12 +148,25 @@ void SearchByNum(Warehouse* Obj, int amount)
     int s;
     cout << "Введите номер секции:" << endl;
     cin>>s;
-    cout << "№ПИСЬМА " << "ОЦЕНКА ПИСЬМА" << "ИНДЕКС ОТПРАВИТЕЛЯ" << "ФАМИЛИЯ ОТПРАВИТЕЛЯ" <<endl;
+
+    StreamTable st(std::cout);
+    st.AddCol(5);
+    st.AddCol(15);
+    st.AddCol(10);
+    st.AddCol(10);
+
+    st.MakeBorderExt(true);
+    st.SetDelimRow(true, '-');//st.SetDelimRow(false);//без символов-разделителей строк
+    st.SetDelimCol(true, '|');//st.SetDelimCol(false);//без символов-разделителей строк
+    st << "PRODUCT" << "SECTION" << "PRICE" << " AMOUNT";
+
     for (int i = 0; i < amount; i++)
     {
         if (Obj[i].num == s)
         {
-            cout << Obj[i].fam << Obj[i].num << Obj[i].price << Obj[i].quant<<endl;
+            for (int i = 0; i < amount; i++) {
+                st << Obj[i].fam  << Obj[i].num << Obj[i].price << Obj[i].quant;
+            }
         }
     }
 } //найти все товары заданной секции
@@ -148,14 +177,24 @@ void SearchByFam(Warehouse* Obj, int amount)
     cin.get();
     cin.getline(s, 32, '\n');
 
-    cout << "ОЦЕНКА ПИСЬМА" << "ИНДЕКС ОТПРАВИТЕЛЯ" << "ФАМИЛИЯ ОТПРАВИТЕЛЯ" <<endl;
+    StreamTable st(std::cout);
+    st.AddCol(5);
+    st.AddCol(15);
+    st.AddCol(10);
+    st.AddCol(10);
+
+    st.MakeBorderExt(true);
+    st.SetDelimRow(true, '-');//st.SetDelimRow(false);//без символов-разделителей строк
+    st.SetDelimCol(true, '|');//st.SetDelimCol(false);//без символов-разделителей строк
+    st << "PRODUCT" << "SECTION" << "PRICE" << " AMOUNT";
+
     for (int i = 0; i < amount; i++)
     {
         if (strcmp(Obj[i].fam, s) == 0)
         {
-            cout << Obj[i].fam << Obj[i].num << Obj[i].price << Obj[i].quant<<endl;
+            st << Obj[i].fam  << Obj[i].num << Obj[i].price << Obj[i].quant;
         }
-        cout << "-----------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        //cout << "-----------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     }
 } //найти товар по названию
 
@@ -179,71 +218,44 @@ void Sort(Warehouse* Obj, int amount)
     }
 
     // в цикле выводим в консоль отсортированный массив структур
-    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
+    StreamTable st(std::cout);
+    st.AddCol(5);
+    st.AddCol(15);
+    st.AddCol(10);
+    st.AddCol(10);
+
+    st.MakeBorderExt(true);
+    st.SetDelimRow(true, '-');//st.SetDelimRow(false);//без символов-разделителей строк
+    st.SetDelimCol(true, '|');//st.SetDelimCol(false);//без символов-разделителей строк
+
+
+    //заголовок и значения выводятся одинаково
+    st << "PRODUCT" << "SECTION" << "PRICE" << "AMOUNT";
     for (int i = 0; i < amount; i++) {
-        cout << Obj[i].fam<<" "<< Obj[i].price<<" "<<Obj[i].quant<<" "<<Obj[i].num<<endl;
+        st << Obj[i].fam  << Obj[i].num << Obj[i].price << Obj[i].quant;
     }
 }
 
-
 ////////////////////////SIDE HOES///////////////////////////////////////////////////////////////////////////////////////
 
-//При каждом запуске программы все сохранённые данные автоматически считываются с диска//
-void ReadDataFromDisk(string fileName){
-    cout << "НАЗВАНИЕ " << "№ СЕКЦИИ " << "ЦЕНА " << "КОЛИЧЕСТВО " <<endl;
+//При каждом запуске программы все сохранённые данные автоматически считываются с диска
+void ReadDataFromDisk(Warehouse* Obj, int amount,string fileName) {
+
+    cout << "Данные с диска: " << endl;
     string line;
-    ifstream myfile (fileName);
-    if (myfile.is_open())
-    {
-        while (! myfile.eof() )
-        {
-            getline (myfile,line);
+    ifstream myfile(fileName);
+    if (myfile.is_open()) {
+        while (!myfile.eof()) {
+            getline(myfile, line);
             cout << line << endl;
         }
         myfile.close();
     }
+
+
 }
 
-
-
-//ne robit(((
-
-//    //поток для чтения
-//    ifstream reading("file.txt");
-//
-//    ifstream in(fileName);
-//    string s;
-//    while (in.peek() != EOF) {
-//        getline(in, s);
-//        amount++;
-//    } //считаю количество структур (строк) в файле
-//
-//    if (reading){
-//        //выделяем память
-//        Obj = new Warehouse[amount];
-//
-//        for (int i =0; i < amount; i++) {
-//            reading >> Obj[i].fam ;
-//            reading >> Obj[i].price;
-//            reading >> Obj[i].quant;
-//            reading >> Obj[i].num;
-//        }
-//
-//        cout << "Данные считаны с диска."<<endl;
-//    }
-//    else
-//        cout<<"Ошибка открытия диска."<<endl;
-//
-//    reading.close();
-//
-//    cout << "НАЗВАНИЕ ТОВАРА" << "НОМЕР СЕКЦИИ" << "ЦЕНА" << "КОЛИЧЕСТВО ТОВАРА" <<endl;
-//    for (int i = 0; i < amount; i++) {
-//        cout << Obj[i].fam << Obj[i].num << Obj[i].price << Obj[i].quant<<endl;
-//    }
-//
-//}
-
-//При каждом закрытии программы все сохранённые данные автоматически записываются на диск//
+//При каждом закрытии программы все сохранённые данные автоматически записываются на диск
 void SaveDataOnDisk(Warehouse* Obj, int amount, string fileName){
 
     //поток для !записи!
@@ -257,7 +269,8 @@ void SaveDataOnDisk(Warehouse* Obj, int amount, string fileName){
         }
     }
 
-    else{
+    else
+    {
         cout<<"ОШИБКА ЗАПИСИ ДАННЫХ НА ДИСК"<<endl;
     }
     record.close();
