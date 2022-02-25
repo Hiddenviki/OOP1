@@ -1,9 +1,9 @@
 #include "Putin.h"
 
 
-void showMenu(int* a)
-{
-    cout << "------МЕНЮ------" << endl;
+void showMenu(int* a){
+    cout<<endl;
+    cout << "_МЕНЮ_" << endl;
     cout<<endl;
     cout << "1. Вывести новое" << endl;
     cout << "2. Добавить новый товар" << endl;
@@ -25,12 +25,14 @@ int main()
 {
     //SetConsoleCP(1251);
     //setlocale(LC_ALL, "Russian");
-    cout<<"Данные с диска: "<<endl;
-    ReadDataFromDisk("file.txt");
-    Warehouse* MyLittleLetters = 0; //указатель на начало массива структур (вроде)
+
+
+    Warehouse* MyLittleLetters=0; //указатель на начало массива структур (вроде)
+    ReadDataFromDisk(MyLittleLetters, sponsorAmount,"file.txt"); //сразу считываю данные на диске и выделяю под них память
+
     int YesOrNot = 0; //  продолжить или остановить ввод данных
 
-    cout<<"Можете ввести новый товар: "<<endl;
+    cout<<"Можете ввести новый товар "<<endl;
 
     do
     {
