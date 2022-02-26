@@ -32,7 +32,7 @@ void Sort(Warehouse* Obj, int amount);
 
 
 //void ReadDataFromDisk(Warehouse* Obj, int amount, string fileName);
-void ReadDataFromDisk(string fileName);
+void ReadDataFromDisk(Warehouse* Obj, int amount, string fileName);
 void SaveDataOnDisk(Warehouse* Obj, int amount, string fileName);
 
 

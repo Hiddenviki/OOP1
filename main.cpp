@@ -26,27 +26,12 @@ int main()
     //setlocale(LC_ALL, "Russian");
 
 
-
-
     Warehouse* MyLittleLetters=0; //указатель на начало массива структур (вроде)
+    showData(MyLittleLetters, sponsorAmount);
     ReadDataFromDisk(MyLittleLetters, sponsorAmount,"file.txt"); //сразу считываю данные на диске и выделяю под них память
 
-    int YesOrNot = 0; //  продолжить или остановить ввод данных
 
-    cout<<"Можете ввести новый товар "<<endl;
 
-    do
-    {
-        MyLittleLetters = AddStruct(MyLittleLetters, sponsorAmount); //указали на номер последней структуры в массиве
-        setData(MyLittleLetters, sponsorAmount);
-        sponsorAmount++;
-        cout << "Продолжить ввод данных? (1 - да, 0 - нет): "; //ну типо любое кроме нуля это ДА
-        cin >> YesOrNot;
-        cin.get();
-
-    } while (YesOrNot != 0);
-
-    showData(MyLittleLetters, sponsorAmount);
     int a;
     do {
         showMenu(&a);
